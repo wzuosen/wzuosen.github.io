@@ -4,12 +4,18 @@
   
   
   <entry>
-    <title>demo.md</title>
+    <title>demo</title>
     <link href="/2022/08/13/demo-md/"/>
     <url>/2022/08/13/demo-md/</url>
     
     <content type="html"><![CDATA[<p>hexo博客模板首次测试</p>]]></content>
     
+    
+    <categories>
+      
+      <category>DEMO</category>
+      
+    </categories>
     
     
   </entry>
