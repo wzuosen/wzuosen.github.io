@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>ioc刷新过程中的各项接口</title>
+    <link href="/2022/08/14/spring/ioc-interface/"/>
+    <url>/2022/08/14/spring/ioc-interface/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1、aware接口"><a href="#1、aware接口" class="headerlink" title="1、aware接口"></a>1、aware接口</h1><blockquote><p>aware代表感知，在spring中主要作用为感觉对应的bean实例，在spring ioc创建过程中会回调各种aware接口进行赋值</p></blockquote><h2 id="1-1、EnvironmentAware"><a href="#1-1、EnvironmentAware" class="headerlink" title="1.1、EnvironmentAware"></a>1.1、EnvironmentAware</h2><blockquote><p>环境感知接口</p><p>通常用于获取spring的环境变量，例如配置的数据库连接密码等，也可以进行动态修改</p><p>EnvironmentAware的回调在postProcessBeforeInitialization处执行，bean实例化还未初始化，所以动态修改配置属性值是可以被感知的</p></blockquote><h2 id="1-2、EmbeddedValueResolverAware"><a href="#1-2、EmbeddedValueResolverAware" class="headerlink" title="1.2、EmbeddedValueResolverAware"></a>1.2、EmbeddedValueResolverAware</h2><blockquote><p>解析嵌入定义值感知接口</p><p>通常用于获取嵌入式属性值解析器，可以自定义解析特殊标识的属性值</p><p>${}、#{}、</p></blockquote><h2 id="1-3、ResourceLoaderAware"><a href="#1-3、ResourceLoaderAware" class="headerlink" title="1.3、ResourceLoaderAware"></a>1.3、ResourceLoaderAware</h2><blockquote><p>资源加载感知</p><p>获取运行时资源加载器，在spring ioc中就是applicationContext</p></blockquote><h2 id="1-4、ApplicationEventPublisherAware"><a href="#1-4、ApplicationEventPublisherAware" class="headerlink" title="1.4、ApplicationEventPublisherAware"></a>1.4、ApplicationEventPublisherAware</h2><blockquote><p>事件分别器感知</p><p>ApplicationEventPublisher事件分别器，同一管理事件与监听器之间的触发关系，发布事件</p></blockquote><h2 id="1-5、MessageSourceAware"><a href="#1-5、MessageSourceAware" class="headerlink" title="1.5、MessageSourceAware"></a>1.5、MessageSourceAware</h2><blockquote><p>消息源感知</p><p>获取消息源接口，主要用于国际化</p></blockquote><h2 id="1-6、ApplicationContextAware"><a href="#1-6、ApplicationContextAware" class="headerlink" title="1.6、ApplicationContextAware"></a>1.6、ApplicationContextAware</h2><blockquote><p>应用上下文感知</p><p>获取ioc中的核心容器</p></blockquote><h2 id="1-7、LoadTimeWeaverAware"><a href="#1-7、LoadTimeWeaverAware" class="headerlink" title="1.7、LoadTimeWeaverAware"></a>1.7、LoadTimeWeaverAware</h2><blockquote><p> LoadTimeWeaver感知</p><p>LoadTimeWeaver用于当类被载入jvm时，动态转化类。 加载时织入</p></blockquote><h2 id="1-8、BeanNameAware"><a href="#1-8、BeanNameAware" class="headerlink" title="1.8、BeanNameAware"></a>1.8、BeanNameAware</h2><blockquote><p>bean名称感知</p><p>回调设置bean的设置bean名称(只设置自己的)，能够获取到bean本身在容器中的名称</p></blockquote><h2 id="1-9、BeanClassLoaderAware"><a href="#1-9、BeanClassLoaderAware" class="headerlink" title="1.9、BeanClassLoaderAware"></a>1.9、BeanClassLoaderAware</h2><blockquote><p>bean加载器感知</p><p>回调设置加载bean的类加载器</p></blockquote><h2 id="1-10、BeanFactoryAware"><a href="#1-10、BeanFactoryAware" class="headerlink" title="1.10、BeanFactoryAware"></a>1.10、BeanFactoryAware</h2><blockquote><p>beanFactory感知</p><p>回调设置加载类的bean工厂</p></blockquote><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote><p>1-6</p><p>​由spring委托ApplicationContextAwareProcessor类进行上述aware的回调</p><p>7</p><p>​由LoadTimeWeaverAwareProcessor进行回调</p><p>8-10</p><p>​由AbstractAutowireCapableBeanFactory.invokeAwareMethods()执行回调</p><p>aware就是感知接口，通过实现对应接口可以在spring完成容器刷新后得到对应的资源，以此作特殊的功能定制</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>spring</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>spring IOC 容器刷新解析</title>
     <link href="/2022/08/13/spring/spring-ioc/"/>
     <url>/2022/08/13/spring/spring-ioc/</url>
