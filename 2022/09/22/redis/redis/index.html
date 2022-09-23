@@ -24,7 +24,7 @@
 <meta property="og:description" content="一、基础知识1.1、通用命令   命令 作用 示例    keys 匹配redis中的key，正则表达式 keys  *   exists 查看key是否存在 exists key_num   type 查看key存储的值类型 type key_num   del 同步删除key del key_num   unlink 异步删除key(在key空间删除key，key对应的内容异步删除)，是否异步">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-21T16:19:00.000Z">
-<meta property="article:modified_time" content="2022-09-22T16:59:17.558Z">
+<meta property="article:modified_time" content="2022-09-23T17:06:23.241Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k 字
+          6.5k 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          37 分钟
+          55 分钟
         
       </span>
     
@@ -443,7 +443,7 @@
 <tr>
 <th>命令</th>
 <th>作用</th>
-<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -511,7 +511,7 @@
 <tr>
 <th>命令</th>
 <th>作用</th>
-<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -579,7 +579,7 @@
 <tr>
 <th>命令</th>
 <th>作用</th>
-<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -634,7 +634,7 @@
 <tr>
 <th>命令</th>
 <th>作用</th>
-<th>说明</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -681,15 +681,163 @@
 <h1 id="二、提升知识"><a href="#二、提升知识" class="headerlink" title="二、提升知识"></a>二、提升知识</h1><h2 id="2-1、配置文件"><a href="#2-1、配置文件" class="headerlink" title="2.1、配置文件"></a>2.1、配置文件</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-number">1</span>、<span class="hljs-keyword">include</span><br>引入外部的配置文件<br><span class="hljs-comment">---------------------网络配置--------------------------</span><br><span class="hljs-number">2</span>、bind<br>限定访问redis的IP地址<br><br><span class="hljs-number">3</span>、protected-mode<br>设置保护模式，yes本机访问，<span class="hljs-keyword">no</span>无限制<br><br><span class="hljs-number">4</span>、port<br>端口号<br><br><span class="hljs-number">5</span>、tcp-backlog<br>tcp-backlog：backlog队列总和=未完成三次握手队列 + 已经完成三次握手队列<br>高并发的情况下多个链接设置较高数值，防止链接慢的客户端超时<br><br><span class="hljs-number">6</span>、timeout<br>空闲客户端多久关闭，<span class="hljs-number">0</span>永不关闭<br><br><span class="hljs-number">7</span>、tcp-keepalive<br>tcp心跳检测时间(秒)，<span class="hljs-number">0</span>不检查<br><br><span class="hljs-comment">----------------------通用-------------------------------------</span><br><span class="hljs-number">1</span>、daemonize<br>是否作为后台进程运行<br><br><span class="hljs-number">2</span>、pidfile<br>存放pid文件位置<br><br><span class="hljs-number">3</span>、loglevel<br>日志级别：<span class="hljs-keyword">debug</span>、<span class="hljs-keyword">verbose</span>、<span class="hljs-keyword">notice</span>、<span class="hljs-built_in">warning</span>，默认为<span class="hljs-keyword">notice</span><br><br><span class="hljs-number">4</span>、logfile<br>日志文件名称<br><br><span class="hljs-number">5</span>、<span class="hljs-keyword">database</span><br>数据库分裤数量，默认<span class="hljs-number">16</span><br><br><span class="hljs-comment">------------------------安全---------------------------------------</span><br><span class="hljs-number">1</span>、requirepass<br>访问密码(直接通过内存设置未持久化，通过配置文件持久化)<br><br><span class="hljs-comment">------------------------限制--------------------------------------- </span><br><span class="hljs-number">1</span>、maxclients<br>最多多少个客户端链接<br><br><span class="hljs-number">2</span>、maxmemory<br>最大内存量<br>一旦到达内存使用上限，redis将会试图移除内部数据，移除规则可以通过maxmemory-<span class="hljs-keyword">policy</span>来指定。<br><br><span class="hljs-number">3</span>、maxmemory-<span class="hljs-keyword">policy</span><br>内存达到峰值后采用策略<br>	<span class="hljs-keyword">volatile</span>-lru：使用LRU算法移除key，只对设置了过期时间的键；（最近最少使用）<br>	allkeys-lru：在所有集合key中，使用LRU算法移除key<br>	<span class="hljs-keyword">volatile</span>-random：在过期集合中移除随机的key，只对设置了过期时间的键<br>	allkeys-random：在所有集合key中，移除随机的key<br>	<span class="hljs-keyword">volatile</span>-ttl：移除那些TTL值最小的key，即那些最近要过期的key<br>	noeviction：不进行移除。针对写操作，只是返回错误信息<br><br><span class="hljs-number">4</span>、maxmemory-samples<br>设置样本数量，LRU算法和最小TTL算法都并非是精确的算法，而是估算值，所以你可以设置样本的大小，redis默认会检查这么多个key并选择其中LRU的那个<br></code></pre></td></tr></table></figure>
 
 <h2 id="2-2、订阅与发布功能"><a href="#2-2、订阅与发布功能" class="headerlink" title="2.2、订阅与发布功能"></a>2.2、订阅与发布功能</h2><blockquote>
-<p>…</p>
+<p>发布&#x2F;订阅配合使用，且只能获取当时的消息，redis不提供持久化操作</p>
+<p>类似于消息队列，但是功能比消息队列简单太多</p>
 </blockquote>
-<h1 id="三、常见形式以及解决策略"><a href="#三、常见形式以及解决策略" class="headerlink" title="三、常见形式以及解决策略"></a>三、常见形式以及解决策略</h1><h2 id="2-1、redis缓存与mysql数据同步"><a href="#2-1、redis缓存与mysql数据同步" class="headerlink" title="2.1、redis缓存与mysql数据同步"></a>2.1、redis缓存与mysql数据同步</h2><h4 id="2-1-1、手动同步"><a href="#2-1-1、手动同步" class="headerlink" title="2.1.1、手动同步"></a>2.1.1、手动同步</h4><blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>publish</td>
+<td>发布(向通道中发布信息)</td>
+<td>publish music pushMessage</td>
+</tr>
+<tr>
+<td>subscribe</td>
+<td>订阅(订阅通道信息)</td>
+<td>subscribe music</td>
+</tr>
+</tbody></table>
+<h2 id="2-3、事务"><a href="#2-3、事务" class="headerlink" title="2.3、事务"></a>2.3、事务</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>multi</td>
+<td>开启事务</td>
+<td>multi</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>执行事务队列中命令</td>
+<td>exec</td>
+</tr>
+<tr>
+<td>discard</td>
+<td>放弃事务队列中的所有命令</td>
+<td>discard</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>1、multi开启事物，接下来输入的命令都暂存在事务队列，</p>
+<p>2、当遇到exec命令时执行事务队列中命令</p>
+<p>3、discard放弃事务队列中命令，事务结束</p>
+</blockquote>
+<h3 id="2-3-1、事务命令错误处理"><a href="#2-3-1、事务命令错误处理" class="headerlink" title="2.3.1、事务命令错误处理"></a>2.3.1、事务命令错误处理</h3><blockquote>
+<p>1、可检查性错误，如命令关键字错误，redis可以识别出并在exec执行时自动discard</p>
+<p>2、不可检查性错误，如incr一个非数字，只有在真正执行时才能识别，exec时redis会丢弃错误命令，执行其他正确命令</p>
+</blockquote>
+<h3 id="2-3-2、watch与unwatch"><a href="#2-3-2、watch与unwatch" class="headerlink" title="2.3.2、watch与unwatch"></a>2.3.2、watch与unwatch</h3><blockquote>
+<p>1、watch 监控key值变动，在事务之前监控key，若该key被其他事务修改，则本事务无效</p>
+<p>2、unwatch 解除所有key的监控</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>watch</td>
+<td>在事务开始前监控key</td>
+<td>watch key1 key2</td>
+</tr>
+<tr>
+<td>unwatch</td>
+<td>解除所有key的监控</td>
+<td>unwatch</td>
+</tr>
+</tbody></table>
+<h2 id="2-4、数据持久化"><a href="#2-4、数据持久化" class="headerlink" title="2.4、数据持久化"></a>2.4、数据持久化</h2><h3 id="2-4-1、RDB方式"><a href="#2-4-1、RDB方式" class="headerlink" title="2.4.1、RDB方式"></a>2.4.1、RDB方式</h3><blockquote>
+<p>Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到 一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。 整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能 如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。<strong>RDB的缺点是最后一次持久化后的数据可能丢失。</strong></p>
+<p>快照形式，恢复只需要把快照文件读取到内存即可</p>
+<p><strong>配置:</strong></p>
+<p>dir &#x2F;root&#x2F;rbdfilepath&#x2F;      # 指定dump文件存储路径</p>
+<p>dbfilename rdb.dump     # 指定生成的rdb文件名称</p>
+<p><strong>存储策略:</strong></p>
+<p>save  3600 1      # 1h之内有一次修改就会fork保存</p>
+<p>save  300 100    # 5min内有100次的修改就会fork保存</p>
+<p>save  60 10000  # 1min内有10000次修改则fork保存</p>
+<p><strong>save|bgsave</strong></p>
+<p>save: 阻塞用户命 令，同步fork</p>
+<p>bgsave: 响应用户命令，异步fork</p>
+<p><strong>恢复：</strong></p>
+<p>1、 关闭Redis</p>
+<p>2、先把备份的文件拷贝到工作目录下 cp dump2.rdb dump.rdb</p>
+<p>3、启动Redis, 备份数据会直接加载</p>
+<p><strong>优势：</strong></p>
+<p>1、适合大规模的数据恢复</p>
+<p>2、对数据完整性和一致性要求不高更适合使用</p>
+<p>3、节省磁盘空间</p>
+<p>4、恢复速度快</p>
+<p><strong>劣势：</strong></p>
+<p>1、Fork的时候，内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑</p>
+<p>2、虽然Redis在fork时使用了<strong>写时拷贝技术</strong>,但是如果数据庞大时还是比较消耗性能。</p>
+<p>3、在备份周期在一定间隔时间做一次备份，所以如果Redis意外down掉的话，就会丢失最后一次快照后的所有修改。</p>
+</blockquote>
+<h3 id="2-4-2、AOF方式"><a href="#2-4-2、AOF方式" class="headerlink" title="2.4.2、AOF方式"></a>2.4.2、AOF方式</h3><blockquote>
+<p>以<strong>日志</strong>的形式来记录每个写操作（增量保存），将Redis执行过的所有写指令记录下来(<strong>读操作不记录</strong>)， <strong>只许追加文件但不可以改写文件</strong>，redis启动之初会读取该文件重新构建数据，换言之，redis 重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作</p>
+<p><strong>配置：</strong></p>
+<p>appendfsync always|everysec|no</p>
+<p>​	1、always   每个命令都写入日志</p>
+<p>​	2、everysec 每秒写入日志</p>
+<p>​	3、no 写入时机交由操作系统 </p>
+<p><strong>优势：</strong></p>
+<p>1、备份机制更稳健，丢失数据概率更低。</p>
+<p>2、可读的日志文本，通过操作AOF文件，可以处理误操作。</p>
+<p><strong>劣势：</strong></p>
+<p>1、比起RDB占用更多的磁盘空间。</p>
+<p>2、恢复备份速度要慢。</p>
+<p>3、每次读写都同步的话，有一定的性能压力。</p>
+<p>4、存在个别Bug，造成恢复不能。</p>
+</blockquote>
+<h2 id="2-5、主从复制"><a href="#2-5、主从复制" class="headerlink" title="2.5、主从复制"></a>2.5、主从复制</h2><blockquote>
+<p>由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重</p>
+</blockquote>
+<h3 id="2-5-1、主从配置"><a href="#2-5-1、主从配置" class="headerlink" title="2.5.1、主从配置"></a>2.5.1、主从配置</h3><blockquote>
+<p>slaveof  192.168.1.103 6379</p>
+<p>指定redis服务为另一个服务的从机</p>
+<p>主服务写数据、从服务读数据</p>
+<p><strong>重启</strong></p>
+<p>主机重启等待从机重新连接即可，不需要配置</p>
+<p>从机重启需要重新设置slaveof</p>
+<p><strong>异常情况:</strong></p>
+<p>主机挂了，从机还是从机，无法写数据了</p>
+<p>从机中途变更链接新主机，之前数据清楚，复制最新主机数据</p>
+<p><strong>角色变更：</strong></p>
+<p>slaveof no one 由从机变为主机</p>
+<p><strong>从机复制原理：</strong></p>
+<p>1、slave连接至master后发送sync请求</p>
+<p>2、master完成当前修改命令后将数据文件全量同步给slave</p>
+<p>3、后续master通过增量同步，同步修改命令给slave完成数据同步</p>
+</blockquote>
+<h3 id="2-5-2、哨兵机制"><a href="#2-5-2、哨兵机制" class="headerlink" title="2.5.2、哨兵机制"></a>2.5.2、哨兵机制</h3><blockquote>
+<p>可以在主机故障的情况下自动替换slave为master</p>
+<p><strong>配置文件:</strong></p>
+<p>sentinel monitor mymaster 127.0.0.1 6379 1</p>
+<p>其中mymaster为监控对象起的服务器名称， 1 为至少有多少个哨兵同意迁移的数量</p>
+</blockquote>
+<h2 id="2-6、redis集群"><a href="#2-6、redis集群" class="headerlink" title="2.6、redis集群"></a>2.6、redis集群</h2><blockquote>
+<p>配置文件。。。</p>
+</blockquote>
+<h1 id="三、常见形式以及解决策略"><a href="#三、常见形式以及解决策略" class="headerlink" title="三、常见形式以及解决策略"></a>三、常见形式以及解决策略</h1><h2 id="2-1、redis缓存与mysql数据同步"><a href="#2-1、redis缓存与mysql数据同步" class="headerlink" title="2.1、redis缓存与mysql数据同步"></a>2.1、redis缓存与mysql数据同步</h2><h3 id="2-1-1、手动同步"><a href="#2-1-1、手动同步" class="headerlink" title="2.1.1、手动同步"></a>2.1.1、手动同步</h3><blockquote>
 <p>在更新数据前货更新数据后同步数据到redis，在程序内部手动同步</p>
 </blockquote>
-<h4 id="2-1-2、MQ消息同步"><a href="#2-1-2、MQ消息同步" class="headerlink" title="2.1.2、MQ消息同步"></a>2.1.2、MQ消息同步</h4><blockquote>
+<h3 id="2-1-2、MQ消息同步"><a href="#2-1-2、MQ消息同步" class="headerlink" title="2.1.2、MQ消息同步"></a>2.1.2、MQ消息同步</h3><blockquote>
 <p>在更新数据前货更新数据后发送同步消息至MQ，由MQ消息消费者读取消息，同步给redis</p>
 </blockquote>
-<h4 id="2-1-3、Mysql-BinLog同步"><a href="#2-1-3、Mysql-BinLog同步" class="headerlink" title="2.1.3、Mysql BinLog同步"></a>2.1.3、Mysql BinLog同步</h4><blockquote>
+<h3 id="2-1-3、Mysql-BinLog同步"><a href="#2-1-3、Mysql-BinLog同步" class="headerlink" title="2.1.3、Mysql BinLog同步"></a>2.1.3、Mysql BinLog同步</h3><blockquote>
 <p>redis通过第三方组建订阅mysql的binlog，直接同步(伪装成mysql从服务器，mysql的主从同步机制)</p>
 </blockquote>
 <h2 id="2-2、延迟双删与延迟双写"><a href="#2-2、延迟双删与延迟双写" class="headerlink" title="2.2、延迟双删与延迟双写"></a>2.2、延迟双删与延迟双写</h2><blockquote>
