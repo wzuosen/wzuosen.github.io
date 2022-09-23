@@ -23,6 +23,25 @@
   
   
   <entry>
+    <title>redis常用数据类型底层结构</title>
+    <link href="/2022/09/22/redis/redis_datastructure/"/>
+    <url>/2022/09/22/redis/redis_datastructure/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1、string"><a href="#1、string" class="headerlink" title="1、string"></a>1、string</h1><p><img src="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png"></p><h1 id="2、list"><a href="#2、list" class="headerlink" title="2、list"></a>2、list</h1><h1 id="3、hash"><a href="#3、hash" class="headerlink" title="3、hash"></a>3、hash</h1><h1 id="4、set"><a href="#4、set" class="headerlink" title="4、set"></a>4、set</h1><h1 id="5、zset"><a href="#5、zset" class="headerlink" title="5、zset"></a>5、zset</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>redis</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>spring aop代理对象解析</title>
     <link href="/2022/08/18/spring/aop-proxy/"/>
     <url>/2022/08/18/spring/aop-proxy/</url>

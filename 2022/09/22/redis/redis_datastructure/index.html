@@ -16,21 +16,33 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://example.com/categories/index.html">
+    <meta name="description" content="1、string 2、list3、hash4、set5、zset">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis常用数据类型底层结构">
+<meta property="og:url" content="http://example.com/2022/09/22/redis/redis_datastructure/index.html">
 <meta property="og:site_name" content="wzuosen">
+<meta property="og:description" content="1、string 2、list3、hash4、set5、zset">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png">
+<meta property="article:published_time" content="2022-09-21T16:19:00.000Z">
+<meta property="article:modified_time" content="2022-09-23T17:22:36.246Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png">
   
   
   
-  <title>分类 - wzuosen</title>
+  <title>redis常用数据类型底层结构 - wzuosen</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -80,7 +92,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -185,9 +197,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="分类"></span>
+            <span id="subtitle" data-typed-text="redis常用数据类型底层结构"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-22 00:19" pubdate>
+          2022年9月22日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          31 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          1 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -203,150 +255,138 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">redis常用数据类型底层结构</h1>
+            
+            
+              <div class="markdown-body">
                 
+                <h1 id="1、string"><a href="#1、string" class="headerlink" title="1、string"></a>1、string</h1><p><img src="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="2、list"><a href="#2、list" class="headerlink" title="2、list"></a>2、list</h1><h1 id="3、hash"><a href="#3、hash" class="headerlink" title="3、hash"></a>3、hash</h1><h1 id="4、set"><a href="#4、set" class="headerlink" title="4、set"></a>4、set</h1><h1 id="5、zset"><a href="#5、zset" class="headerlink" title="5、zset"></a>5、zset</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
-
-
-
-
-<div class="category-list">
+<span class="category-chains">
   
   
     
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="spring"
-        id="heading-2a2d595e6ed9a0b24f027f2b63b134d6" role="tab" data-toggle="collapse" href="#collapse-2a2d595e6ed9a0b24f027f2b63b134d6"
-        aria-expanded="false"
-      >
-        spring
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/spring/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>4</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-2a2d595e6ed9a0b24f027f2b63b134d6"
-           role="tabpanel" aria-labelledby="heading-2a2d595e6ed9a0b24f027f2b63b134d6">
+      <span class="category-chain">
         
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/08/18/spring/aop-proxy/" title="spring aop代理对象解析"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">spring aop代理对象解析</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/08/17/spring/spring-aop/" title="浅识spring aop流程"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">浅识spring aop流程</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/08/14/spring/ioc-interface/" title="ioc刷新过程中的各项接口"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ioc刷新过程中的各项接口</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/08/13/spring/spring-ioc/" title="spring IOC 容器刷新解析"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">spring IOC 容器刷新解析</span>
-        </a>
-      
-    
-  </div>
+  <a href="/categories/redis/" class="category-chain-item">redis</a>
+  
+  
 
-        
-      </div>
+      </span>
+    
+  
+</span>
+
     </div>
   
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="redis"
-        id="heading-86a1b907d54bf7010394bf316e183e67" role="tab" data-toggle="collapse" href="#collapse-86a1b907d54bf7010394bf316e183e67"
-        aria-expanded="false"
-      >
-        redis
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/redis/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>2</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-86a1b907d54bf7010394bf316e183e67"
-           role="tabpanel" aria-labelledby="heading-86a1b907d54bf7010394bf316e183e67">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/09/22/redis/redis/" title="redis学习记录"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">redis学习记录</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/09/22/redis/redis_datastructure/" title="redis常用数据类型底层结构"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">redis常用数据类型底层结构</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
   
 </div>
 
 
-              </div>
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/22/redis/redis/" title="redis学习记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">redis学习记录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/18/spring/aop-proxy/" title="spring aop代理对象解析">
+                        <span class="hidden-mobile">spring aop代理对象解析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-          </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -440,6 +480,72 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
