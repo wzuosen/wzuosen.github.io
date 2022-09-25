@@ -16,19 +16,17 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1、string 2、list3、hash4、set5、zset">
+    <meta name="description" content="1、redisObject redis中键值对对象     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type: OBJ_STRING：string类似 OBJ_LIST:	list类型 OBJ_HASH:	hash类型 OBJ_SET：	set类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis常用数据类型底层结构">
-<meta property="og:url" content="http://example.com/2022/09/22/redis/redis_datastructure/index.html">
+<meta property="og:url" content="http://example.com/2022/09/26/redis/redis_datastructure/index.html">
 <meta property="og:site_name" content="wzuosen">
-<meta property="og:description" content="1、string 2、list3、hash4、set5、zset">
+<meta property="og:description" content="1、redisObject redis中键值对对象     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type: OBJ_STRING：string类似 OBJ_LIST:	list类型 OBJ_HASH:	hash类型 OBJ_SET：	set类型">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png">
-<meta property="article:published_time" content="2022-09-21T16:19:00.000Z">
-<meta property="article:modified_time" content="2022-09-23T17:22:36.246Z">
+<meta property="article:published_time" content="2022-09-25T16:19:00.000Z">
+<meta property="article:modified_time" content="2022-09-25T16:56:23.086Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png">
   
   
   
@@ -208,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-22 00:19" pubdate>
-          2022年9月22日 凌晨
+        <time datetime="2022-09-26 00:19" pubdate>
+          2022年9月26日 凌晨
         </time>
       </span>
     
@@ -220,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          31 字
+          2.1k 字
         
       </span>
     
@@ -231,7 +229,7 @@
         
         
         
-          1 分钟
+          18 分钟
         
       </span>
     
@@ -274,8 +272,160 @@
             
               <div class="markdown-body">
                 
-                <h1 id="1、string"><a href="#1、string" class="headerlink" title="1、string"></a>1、string</h1><p><img src="https://pic.imgdb.cn/item/632deb7316f2c2beb11591b6.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="2、list"><a href="#2、list" class="headerlink" title="2、list"></a>2、list</h1><h1 id="3、hash"><a href="#3、hash" class="headerlink" title="3、hash"></a>3、hash</h1><h1 id="4、set"><a href="#4、set" class="headerlink" title="4、set"></a>4、set</h1><h1 id="5、zset"><a href="#5、zset" class="headerlink" title="5、zset"></a>5、zset</h1>
+                <h1 id="1、redisObject"><a href="#1、redisObject" class="headerlink" title="1、redisObject"></a>1、redisObject</h1><blockquote>
+<p>redis中键值对对象</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>作用</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>表示存储的对象类型</td>
+<td>4bit</td>
+</tr>
+<tr>
+<td>encoding</td>
+<td>对象内部编码(不同类型存储底层结构)</td>
+<td>4bit</td>
+</tr>
+<tr>
+<td>ptr</td>
+<td>数据指针、指向真实的数据地址</td>
+<td>指针</td>
+</tr>
+</tbody></table>
+<p><strong>type:</strong></p>
+<p>OBJ_STRING：string类似</p>
+<p>OBJ_LIST:	list类型</p>
+<p>OBJ_HASH:	hash类型</p>
+<p>OBJ_SET：	set类型</p>
+<p>OBJ_ZSET:	zset类型</p>
+<p><strong>encoding:</strong></p>
+<p>OBJ_ENCODING_RAW: 最原生的表示方式。其实只有string类型才会用这个encoding值（表示成sds）。</p>
+<p>OBJ_ENCODING_INT: 表示成数字。实际用long表示。</p>
+<p>OBJ_ENCODING_EMBSTR: 表示成一种特殊的嵌入式的sds。</p>
+<p>OBJ_ENCODING_HT: 表示成dict。。</p>
+<p>OBJ_ENCODING_LINKEDLIST: 也是个旧的表示方式，已不再用。</p>
+<p>OBJ_ENCODING_ZIPLIST:表示成ziplist。</p>
+<p>OBJ_ENCODING_INTSET: 表示成intset。用于set数据结构。</p>
+<p>OBJ_ENCODING_SKIPLIST: 表示成skiplist。用于sorted set数据结构。</p>
+<p>OBJ_ENCODING_QUICKLIST: 表示成quicklist。用于list数据结构。</p>
+<blockquote>
+<p><strong>同一个type可以对应不同的类型</strong></p>
+<p><strong>type:string</strong></p>
+<p>encoding:OBJ_ENCODING_RAW|OBJ_ENCODING_INT|OBJ_ENCODING_EMBSTR</p>
+<p><strong>type:hash</strong></p>
+<p>encoding:OBJ_ENCODING_ZIPLIST|OBJ_ENCODING_HT</p>
+<p><strong>type:list</strong></p>
+<p>encoding:OBJ_ENCODING_ZIPLIST|OBJ_ENCODING_QUICKLIST</p>
+<p><strong>type:set</strong></p>
+<p>encoding:OBJ_ENCODING_INTSET|(hash)</p>
+<p><strong>type:zset</strong></p>
+<p>encoding:OBJ_ENCODING_ZIPLIST|OBJ_ENCODING_SKIPLIST</p>
+</blockquote>
+<h1 id="2、string"><a href="#2、string" class="headerlink" title="2、string"></a>2、string</h1><h1 id="3、list"><a href="#3、list" class="headerlink" title="3、list"></a>3、list</h1><blockquote>
+<p>在redis3.2之前，list由ziplist和linkedlist存储</p>
+<p>在redis3.2之后，list由ziplist和quicklist存储</p>
+</blockquote>
+<h2 id="3-1、zipList"><a href="#3-1、zipList" class="headerlink" title="3.1、zipList"></a>3.1、zipList</h2><h3 id="3-1-1、ziplist的特点"><a href="#3-1-1、ziplist的特点" class="headerlink" title="3.1.1、ziplist的特点"></a>3.1.1、ziplist的特点</h3><blockquote>
+<p>地址连续的存储结构，类似于数组，可以通过下标快速访问，适合数据量较小的情况</p>
+<p>因为是连续空间，所以在增加、修改时也和数组一样需要扩容、减少容量</p>
+<p><strong>ziplist中每个节点的长度大小不固定</strong></p>
+</blockquote>
+<h3 id="3-1-2、数据结构"><a href="#3-1-2、数据结构" class="headerlink" title="3.1.2、数据结构"></a>3.1.2、数据结构</h3><blockquote>
+<p><strong>ziplist的结构</strong></p>
+<p>|<strong>zlbytes</strong>|<strong>zltail</strong>|<strong>zllen</strong>|entry1|entry2|…|<strong>zlend</strong>|</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zlbytes</td>
+<td>占用空间的总长度</td>
+<td></td>
+</tr>
+<tr>
+<td>zltail</td>
+<td>从头部到尾部的偏移量(可以快速定位到list的尾部–&gt;lpush与rpush)</td>
+<td></td>
+</tr>
+<tr>
+<td>zllen</td>
+<td>节点数量</td>
+<td></td>
+</tr>
+<tr>
+<td>zlend</td>
+<td>ziplist结尾描述符</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>ziplist中entry结构</strong></p>
+<p>|<strong>previous_entry_length</strong>|<strong>len</strong>|<strong>encoding</strong>|<strong>content</strong>|</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>previous_entry_length</td>
+<td>前一个节点的长度(可以快速的定位到前节点)</td>
+<td>1字节或5字节长度</td>
+</tr>
+<tr>
+<td>len</td>
+<td>当前节点的长度(快速定位到下一节点)</td>
+<td>4 字节长度</td>
+</tr>
+<tr>
+<td>encoding</td>
+<td>存储的数据类型</td>
+<td>1 字节长度</td>
+</tr>
+<tr>
+<td>content</td>
+<td>真实数据内容</td>
+<td>保存实际数据。</td>
+</tr>
+</tbody></table>
+<p>previous_entry_length：取值 1 字节时，表示上一个 entry 的长度小于 254 字节。虽然 1 字节的值能表示的数值范围是 0 到 255，但是压缩列表中 zlend 的取值默认是 255，因此，就默认用 255 表示整个压缩列表的结束，其他表示长度的地方就不能再用 255 这个值了。所以，当上一个 entry 长度小于 254 字节时，prev_len 取值为 1 字节，否则，就取值为 5 字节。</p>
+</blockquote>
+<h3 id="3-1-3、使用ziplist的条件"><a href="#3-1-3、使用ziplist的条件" class="headerlink" title="3.1.3、使用ziplist的条件"></a>3.1.3、使用ziplist的条件</h3><blockquote>
+<p> 1.list对象保存的所有字符串元素长度都小于64字节</p>
+<p> 2.list对象保存的元素数量小于512个</p>
+</blockquote>
+<h2 id="3-2、linkedlist-3-2之前"><a href="#3-2、linkedlist-3-2之前" class="headerlink" title="3.2、linkedlist(3.2之前)"></a>3.2、linkedlist(3.2之前)</h2><h3 id="3-2-1、linkedlist特点"><a href="#3-2-1、linkedlist特点" class="headerlink" title="3.2.1、linkedlist特点"></a>3.2.1、linkedlist特点</h3><blockquote>
+<p>类似于java中的双向链表，拥有指向前驱以及后继接点的指针</p>
+<p>因为前驱\后继指针的缘故，元素大小比ziplist要大，浪费了一定空间</p>
+</blockquote>
+<h3 id="3-2-2、使用linkedlist的条件"><a href="#3-2-2、使用linkedlist的条件" class="headerlink" title="3.2.2、使用linkedlist的条件"></a>3.2.2、使用linkedlist的条件</h3><blockquote>
+<p>当list的条件不满足ziplist时就会转换为linkedlist</p>
+</blockquote>
+<h2 id="3-3、quicklist-3-2之后"><a href="#3-3、quicklist-3-2之后" class="headerlink" title="3.3、quicklist(3.2之后)"></a>3.3、quicklist(3.2之后)</h2><h3 id="3-3-1、quicklist的特点"><a href="#3-3-1、quicklist的特点" class="headerlink" title="3.3.1、quicklist的特点"></a>3.3.1、quicklist的特点</h3><blockquote>
+<p>quicklist为ziplist和linkedlist结合体</p>
+<p>1、quicklist是双向链表，每个元素拥有指向前驱、后继节点的指针</p>
+<p>2、quicklist的节点类型为ziplist，为连续空间的存储结构</p>
+<p>3、quicklist综合了ziplist和linkedlist的优点，在操作数据性能和数据存储空间之间做出了均衡</p>
+</blockquote>
+<h3 id="3-3-2、使用quicklist的条件"><a href="#3-3-2、使用quicklist的条件" class="headerlink" title="3.3.2、使用quicklist的条件"></a>3.3.2、使用quicklist的条件</h3><blockquote>
+<p>当list的条件不满足ziplist时就会转换为quicklist</p>
+</blockquote>
+<h1 id="4、hash"><a href="#4、hash" class="headerlink" title="4、hash"></a>4、hash</h1><blockquote>
+<p>hash由ziplist和hashtable存储</p>
+</blockquote>
+<h1 id="5、set"><a href="#5、set" class="headerlink" title="5、set"></a>5、set</h1><h1 id="6、zset"><a href="#6、zset" class="headerlink" title="6、zset"></a>6、zset</h1>
                 
               </div>
             
@@ -315,18 +465,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/22/redis/redis/" title="redis学习记录">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">redis学习记录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/18/spring/aop-proxy/" title="spring aop代理对象解析">
-                        <span class="hidden-mobile">spring aop代理对象解析</span>
+                      <a href="/2022/09/22/redis/redis/" title="redis学习记录">
+                        <span class="hidden-mobile">redis学习记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

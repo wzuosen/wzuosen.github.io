@@ -223,15 +223,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/09/22/redis/redis/" target="_self">
-          redis学习记录
+        <a href="/2022/09/26/redis/redis_datastructure/" target="_self">
+          redis常用数据类型底层结构
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/22/redis/redis/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/26/redis/redis_datastructure/" target="_self">
         <div>
-          一、基础知识1.1、通用命令   命令 作用 示例    keys 匹配redis中的key，正则表达式 keys  *   exists 查看key是否存在 exists key_num   type 查看key存储的值类型 type key_num   del 同步删除key del key_num   unlink 异步删除key(在key空间删除key，key对应的内容异步删除)，是否异步
+          1、redisObject redis中键值对对象     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type: OBJ_STRING：string类似 OBJ_LIST:	list类型 OBJ_HASH:	hash类型 OBJ_SET：	set类型
         </div>
       </a>
 
@@ -239,8 +239,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-09-22 00:19" pubdate>
-              2022-09-22
+            <time datetime="2022-09-26 00:19" pubdate>
+              2022-09-26
             </time>
           </div>
         
@@ -277,15 +277,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/09/22/redis/redis_datastructure/" target="_self">
-          redis常用数据类型底层结构
+        <a href="/2022/09/22/redis/redis/" target="_self">
+          redis学习记录
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/22/redis/redis_datastructure/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/22/redis/redis/" target="_self">
         <div>
-          1、string 2、list3、hash4、set5、zset
+          一、基础知识1.1、通用命令   命令 作用 示例    keys 匹配redis中的key，正则表达式 keys  *   exists 查看key是否存在 exists key_num   type 查看key存储的值类型 type key_num   del 同步删除key del key_num   unlink 异步删除key(在key空间删除key，key对应的内容异步删除)，是否异步
         </div>
       </a>
 
