@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1、redisObject redis中键值对对象     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type: OBJ_STRING：string类似 OBJ_LIST:	list类型 OBJ_HASH:	hash类型 OBJ_SET：	set类型">
+    <meta name="description" content="1、redisDb与redisObject1.1、redisDb redisDb，即为redis数据库，  1.2、redisObject redis中键值对对象，redisDb存储的数据     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis常用数据类型底层结构">
 <meta property="og:url" content="http://example.com/2022/09/26/redis/redis_datastructure/index.html">
 <meta property="og:site_name" content="wzuosen">
-<meta property="og:description" content="1、redisObject redis中键值对对象     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type: OBJ_STRING：string类似 OBJ_LIST:	list类型 OBJ_HASH:	hash类型 OBJ_SET：	set类型">
+<meta property="og:description" content="1、redisDb与redisObject1.1、redisDb redisDb，即为redis数据库，  1.2、redisObject redis中键值对对象，redisDb存储的数据     字段名称 作用 长度    type 表示存储的对象类型 4bit   encoding 对象内部编码(不同类型存储底层结构) 4bit   ptr 数据指针、指向真实的数据地址 指针   type:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-25T16:19:00.000Z">
-<meta property="article:modified_time" content="2022-09-25T16:56:23.086Z">
+<meta property="article:modified_time" content="2022-09-27T16:37:55.203Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          3.4k 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          18 分钟
+          28 分钟
         
       </span>
     
@@ -272,8 +272,11 @@
             
               <div class="markdown-body">
                 
-                <h1 id="1、redisObject"><a href="#1、redisObject" class="headerlink" title="1、redisObject"></a>1、redisObject</h1><blockquote>
-<p>redis中键值对对象</p>
+                <h1 id="1、redisDb与redisObject"><a href="#1、redisDb与redisObject" class="headerlink" title="1、redisDb与redisObject"></a>1、redisDb与redisObject</h1><h2 id="1-1、redisDb"><a href="#1-1、redisDb" class="headerlink" title="1.1、redisDb"></a>1.1、redisDb</h2><blockquote>
+<p>redisDb，即为redis数据库，</p>
+</blockquote>
+<h2 id="1-2、redisObject"><a href="#1-2、redisObject" class="headerlink" title="1.2、redisObject"></a>1.2、redisObject</h2><blockquote>
+<p>redis中键值对对象，redisDb存储的数据</p>
 </blockquote>
 <table>
 <thead>
@@ -328,7 +331,31 @@
 <p><strong>type:zset</strong></p>
 <p>encoding:OBJ_ENCODING_ZIPLIST|OBJ_ENCODING_SKIPLIST</p>
 </blockquote>
-<h1 id="2、string"><a href="#2、string" class="headerlink" title="2、string"></a>2、string</h1><h1 id="3、list"><a href="#3、list" class="headerlink" title="3、list"></a>3、list</h1><blockquote>
+<h1 id="2、string"><a href="#2、string" class="headerlink" title="2、string"></a>2、string</h1><h2 id="2-1、string的三种类型"><a href="#2-1、string的三种类型" class="headerlink" title="2.1、string的三种类型"></a>2.1、string的三种类型</h2><h3 id="2-1-1、INT"><a href="#2-1-1、INT" class="headerlink" title="2.1.1、INT"></a>2.1.1、INT</h3><blockquote>
+<p>当输入的v值为整数时，string的encoding为OBJ_ENCODING_INT,可以执行incr与decr等命令</p>
+</blockquote>
+<h3 id="2-1-2、EMBSTR"><a href="#2-1-2、EMBSTR" class="headerlink" title="2.1.2、EMBSTR"></a>2.1.2、EMBSTR</h3><blockquote>
+<p>当输入的字符串在embstr范围内，则存储的encoding为embstr类型</p>
+<p>短长度、不被修改、只写入一次</p>
+</blockquote>
+<h3 id="2-1-3、RAW"><a href="#2-1-3、RAW" class="headerlink" title="2.1.3、RAW"></a>2.1.3、RAW</h3><blockquote>
+<p>当输入的字符串超出embstr的长度货embstr修改后，string的encoding变为OBJ_ENCODING_RAW，变为SDS字符串</p>
+<p>长长度、可以修改、两次写入</p>
+</blockquote>
+<h2 id="2-2、sds结构"><a href="#2-2、sds结构" class="headerlink" title="2.2、sds结构"></a>2.2、sds结构</h2><h3 id="2-2-1、sds结构"><a href="#2-2-1、sds结构" class="headerlink" title="2.2.1、sds结构"></a>2.2.1、sds结构</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    len<span class="hljs-punctuation">:</span>sds数据结构目前已经使用的数据长度<br>    alloc<span class="hljs-punctuation">:</span>sds数据结构分配的数据长度<br>    buf<span class="hljs-punctuation">:</span>指向具体的存储元素的数组<br>    flag<span class="hljs-punctuation">:</span>用第三位表示sds数据类型<br><span class="hljs-punctuation">&#125;</span><br><span class="hljs-comment">/*sds结构一共有五种Header定义，其目的是为了满足不同长度的字符串可以使用不同大小的Header，从而节省内存。 </span><br><span class="hljs-comment">Header部分主要包含以下几个部分：len、alloc、flags其中</span><br><span class="hljs-comment">len：表示字符串真正的长度，不包含空终止字和alloc以及flag</span><br><span class="hljs-comment">alloc：表示字符串的最大容量，不包含Header和最后的空终止字符和flag</span><br><span class="hljs-comment">flag：只用了3位表示sds的type 就是表示header的类型*/</span><br><span class="hljs-comment">// 五种header类型，flags取值为0~4</span><br>#define SDS_TYPE_5  <span class="hljs-number">0</span><br>#define SDS_TYPE_8  <span class="hljs-number">1</span><br>#define SDS_TYPE_16 <span class="hljs-number">2</span><br>#define SDS_TYPE_32 <span class="hljs-number">3</span><br>#define SDS_TYPE_64 <span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-2、sds特点"><a href="#2-2-2、sds特点" class="headerlink" title="2.2.2、sds特点"></a>2.2.2、sds特点</h3><blockquote>
+<p><strong>1、空间预分配</strong></p>
+<p>一般来说，sds的alloc大与等于len，即预先分配了多余的空间，减少了后续修改的空间分配次数</p>
+<p><strong>2、惰性释放</strong></p>
+<p>当sds进行删减字符内容时，并不会直接释放空间，而是通过len、alloc标识其他空间可用</p>
+<p>在下次再次增加长度时可以避免重新分配空间</p>
+<p><strong>3、二进制安全</strong></p>
+<p>能处理任意二进制数据，而非像c语言一样以\0结尾，可以写入空格等数据</p>
+<p><strong>4、防止字符串溢出</strong></p>
+<p>sds的空间分配由alloc和len决定，当字符串扩充时，首先检查剩余空间是否充足，不会出现当前字符串覆盖相邻地址字符串的情况</p>
+</blockquote>
+<h1 id="3、list"><a href="#3、list" class="headerlink" title="3、list"></a>3、list</h1><blockquote>
 <p>在redis3.2之前，list由ziplist和linkedlist存储</p>
 <p>在redis3.2之后，list由ziplist和quicklist存储</p>
 </blockquote>
@@ -425,6 +452,17 @@
 <h1 id="4、hash"><a href="#4、hash" class="headerlink" title="4、hash"></a>4、hash</h1><blockquote>
 <p>hash由ziplist和hashtable存储</p>
 </blockquote>
+<h2 id="4-1、由ziplist实现hash"><a href="#4-1、由ziplist实现hash" class="headerlink" title="4.1、由ziplist实现hash"></a>4.1、由ziplist实现hash</h2><blockquote>
+<p>利用ziplist实现hash表，k-v中的k在前，v在后，k-v相邻</p>
+<p>|k1|v1|k2|v2|…|</p>
+</blockquote>
+<h2 id="4-2、hashtable-dict-实现的hash"><a href="#4-2、hashtable-dict-实现的hash" class="headerlink" title="4.2、hashtable(dict)实现的hash"></a>4.2、hashtable(dict)实现的hash</h2><h3 id="4-2-1、ziplist什么时候转换为hashtable"><a href="#4-2-1、ziplist什么时候转换为hashtable" class="headerlink" title="4.2.1、ziplist什么时候转换为hashtable"></a>4.2.1、ziplist什么时候转换为hashtable</h3><blockquote>
+<ol>
+<li>当ziplist中entry的数量超过512的时候，会转成hashtable</li>
+<li>单个元素的值超过64字节的时候，会转成hashtable</li>
+</ol>
+</blockquote>
+<p>hashtable则为k-v结构，类似于java中的hashTable(数组+链表)，冲突时拉链法</p>
 <h1 id="5、set"><a href="#5、set" class="headerlink" title="5、set"></a>5、set</h1><h1 id="6、zset"><a href="#6、zset" class="headerlink" title="6、zset"></a>6、zset</h1>
                 
               </div>
@@ -464,6 +502,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/10/09/distributed/distributed_theory/" title="分布式相关理论">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">分布式相关理论</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
