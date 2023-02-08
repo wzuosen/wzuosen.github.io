@@ -23,20 +23,20 @@
 <meta property="og:site_name" content="wzuosen">
 <meta property="og:description" content="一、逻辑结构  不同存储引擎对应的server层是相同的  1、连接器1、mysql的长链接在多次查询后可能会导致mysql占用内存过多  MySQL 在执行过程中临时使用的内存是管理在连接对象里面的。这些资源会在连接断开的时候才释放。所以如果长连接累积下来，可能导致内存占用太大，被系统强行杀掉（OOM），从现象看就是 MySQL 异常重启了。 解决方法： 1、定期断开长链接，或在大对象查询后重新">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230205225052055.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230206233742641.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230207002159968.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230207235227758.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230207235901870.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230208215419260.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230208215737796.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230208214812298.png">
-<meta property="og:image" content="http://example.com/imgs%5Cimage-20230208220025749.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230205225052055.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230206233742641.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230207002159968.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230207235227758.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230207235901870.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230208215419260.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230208215737796.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230208214812298.png">
+<meta property="og:image" content="http://example.com/imgs/image-20230208220025749.png">
 <meta property="article:published_time" content="2023-02-08T17:27:00.000Z">
-<meta property="article:modified_time" content="2023-02-08T17:27:51.710Z">
+<meta property="article:modified_time" content="2023-02-08T17:37:47.481Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/imgs%5Cimage-20230205225052055.png">
+<meta name="twitter:image" content="http://example.com/imgs/image-20230205225052055.png">
   
   
   
@@ -282,7 +282,7 @@
             
               <div class="markdown-body">
                 
-                <h3 id="一、逻辑结构"><a href="#一、逻辑结构" class="headerlink" title="一、逻辑结构"></a>一、逻辑结构</h3><p><img src="/imgs%5Cimage-20230205225052055.png" srcset="/img/loading.gif" lazyload alt="image-20230205225052055"></p>
+                <h3 id="一、逻辑结构"><a href="#一、逻辑结构" class="headerlink" title="一、逻辑结构"></a>一、逻辑结构</h3><p><img src="/imgs/image-20230205225052055.png" srcset="/img/loading.gif" lazyload alt="image-20230205225052055"></p>
 <blockquote>
 <p>不同存储引擎对应的server层是相同的</p>
 </blockquote>
@@ -422,7 +422,7 @@
 </tr>
 </tbody></table>
 <h4 id="4、长事务"><a href="#4、长事务" class="headerlink" title="4、长事务"></a>4、长事务</h4><blockquote>
-<p><img src="/imgs%5Cimage-20230206233742641.png" srcset="/img/loading.gif" lazyload alt="image-20230206233742641"></p>
+<p><img src="/imgs/image-20230206233742641.png" srcset="/img/loading.gif" lazyload alt="image-20230206233742641"></p>
 <p>事务A、B、C可以查看任意版本的数据(通过回滚日志实现)</p>
 <p>当系统里没有比这个回滚日志更早的 read-view 的时候，回滚日志会被删除</p>
 <p>长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间</p>
@@ -488,7 +488,7 @@
 <h4 id="5、索引下推"><a href="#5、索引下推" class="headerlink" title="5、索引下推"></a>5、索引下推</h4><blockquote>
 <p><strong>在索引中就排除掉不符合条件的数据</strong>(mysql5.6引入)</p>
 <p>select * from tuser where name like ‘张 %’ and <strong>age&#x3D;10</strong> and ismale&#x3D;1;</p>
-<p><img src="/imgs%5Cimage-20230207002159968.png" srcset="/img/loading.gif" lazyload alt="image-20230207002159968"></p>
+<p><img src="/imgs/image-20230207002159968.png" srcset="/img/loading.gif" lazyload alt="image-20230207002159968"></p>
 </blockquote>
 <h3 id="五、锁"><a href="#五、锁" class="headerlink" title="五、锁"></a>五、锁</h3><h4 id="1、全局锁"><a href="#1、全局锁" class="headerlink" title="1、全局锁"></a>1、全局锁</h4><blockquote>
 <p>全局锁就是对整个数据库实例加锁（只读不写）</p>
@@ -510,24 +510,24 @@
 <blockquote>
 <p>在查询、更新数据时自动获取MDL读锁，表结构变更需要获取MDL写锁，保证在操作时表结构不会变更</p>
 <p>当对一个表做增删改查操作的时候，加 MDL 读锁；当要对表做结构变更操作的时候，加 MDL 写锁</p>
-<p><img src="/imgs%5Cimage-20230207235227758.png" srcset="/img/loading.gif" lazyload alt="image-20230207235227758"></p>
+<p><img src="/imgs/image-20230207235227758.png" srcset="/img/loading.gif" lazyload alt="image-20230207235227758"></p>
 <p>AB是读锁，可以正常执行，C为写锁，被阻塞，D为C后的读锁，被C锁住</p>
 <p><strong>MDL锁在sql语句开始时获取，在事务结束时才会释放</strong></p>
 </blockquote>
 <h4 id="3、行锁"><a href="#3、行锁" class="headerlink" title="3、行锁"></a>3、行锁</h4><blockquote>
 <p>两阶段锁</p>
 <p><strong>在 InnoDB 事务中，行锁是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。这个就是两阶段锁协议。</strong></p>
-<p><img src="/imgs%5Cimage-20230207235901870.png" srcset="/img/loading.gif" lazyload alt="image-20230207235901870"></p>
+<p><img src="/imgs/image-20230207235901870.png" srcset="/img/loading.gif" lazyload alt="image-20230207235901870"></p>
 <p>如果你的事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放</p>
 </blockquote>
 <h3 id="六、MVCC多版本并发控制"><a href="#六、MVCC多版本并发控制" class="headerlink" title="六、MVCC多版本并发控制"></a>六、MVCC多版本并发控制</h3><h4 id="1、视图的创建"><a href="#1、视图的创建" class="headerlink" title="1、视图的创建"></a>1、视图的创建</h4><p>1.1、InnoDB 里面每个事务有一个唯一的事务 ID，叫作 transaction id。它是在事务开始的时候向 InnoDB 的事务系统申请的，是按申请顺序严格递增的</p>
 <p>1.2、而每行数据也都是有多个版本的。每次事务更新数据的时候，都会生成一个新的数据版本，并且把 transaction id 赋值给这个数据版本的事务 ID，记为 row trx_id。同时，旧的数据版本要保留，并且在新的数据版本中，能够有信息可以直接拿到它。</p>
 <p>也就是说，<strong>数据表中的一行记录，其实可能有多个版本 (row)，每个版本有自己的 row trx_id</strong>。</p>
-<p><img src="/imgs%5Cimage-20230208215419260.png" srcset="/img/loading.gif" lazyload alt="image-20230208215419260"></p>
+<p><img src="/imgs/image-20230208215419260.png" srcset="/img/loading.gif" lazyload alt="image-20230208215419260"></p>
 <blockquote>
 <p> InnoDB 为每个事务构造了一个数组，用来保存这个事务启动瞬间，当前正在“活跃”的所有事务 ID。“活跃”指的就是，启动了但还没提交。数组里面事务 ID 的最小值记为低水位，当前系统里面已经创建过的事务 ID 的最大值加 1 记为高水位。这个<strong>视图数组和高水位，就组成了当前事务的一致性视图</strong>（read-view）</p>
 </blockquote>
-<p><img src="/imgs%5Cimage-20230208215737796.png" srcset="/img/loading.gif" lazyload alt="image-20230208215737796"></p>
+<p><img src="/imgs/image-20230208215737796.png" srcset="/img/loading.gif" lazyload alt="image-20230208215737796"></p>
 <blockquote>
 <p>这样，对于当前事务的启动瞬间来说，一个数据版本的 row trx_id，有以下几种可能：</p>
 <ol>
@@ -540,11 +540,11 @@
 <blockquote>
 <p>begin&#x2F;start transaction 命令并不是一个事务的起点，在执行到它们之后的第一个操作 InnoDB 表的语句，事务才真正启动。如果你想要马上启动一个事务，可以使用 start transaction with consistent snapshot 这个命令</p>
 </blockquote>
-<p><img src="/imgs%5Cimage-20230208214812298.png" srcset="/img/loading.gif" lazyload alt="image-20230208214812298"></p>
+<p><img src="/imgs/image-20230208214812298.png" srcset="/img/loading.gif" lazyload alt="image-20230208214812298"></p>
 <p>事务A：1(在可重复读RR级别下，事务启动时创建了一致性视图，所以查询时为原值1)</p>
 <p>事务B：3(在RR级别下，k值加1，但是事务C先提交，而<strong>更新先读后写</strong>，会读取到事务C更新的数据)</p>
 <p><strong>当前读</strong>：更新操作先读后写，读就为当前读，读取实时的最新数据，不受一致性视图控制</p>
-<p><img src="/imgs%5Cimage-20230208220025749.png" srcset="/img/loading.gif" lazyload alt="image-20230208220025749"></p>
+<p><img src="/imgs/image-20230208220025749.png" srcset="/img/loading.gif" lazyload alt="image-20230208220025749"></p>
 <p>对于一个事务视图来说，除了自己的更新总是可见以外，有三种情况：</p>
 <ol>
 <li>版本未提交，不可见；</li>
